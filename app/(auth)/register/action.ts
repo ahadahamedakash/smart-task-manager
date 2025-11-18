@@ -10,7 +10,13 @@ import { registerSchema } from "@/lib/validation";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
-export async function registerUser(formData: FormData) {
+export interface SignupResult {
+  success: boolean;
+  message: string;
+  error?: string;
+}
+
+export async function registerUser(formData: FormData): Promise<SignupResult> {
   const fullName = formData.get("fullName") as string;
   const userName = formData.get("userName") as string;
   const password = formData.get("password") as string;
@@ -27,7 +33,11 @@ export async function registerUser(formData: FormData) {
   const validation = registerSchema.safeParse({ fullName, userName, password });
 
   if (!validation.success) {
-    return { error: validation.error };
+    return {
+      success: false,
+      message: "Validation error",
+      // error: validation.error,
+    };
   }
 
   await dbConnect();
