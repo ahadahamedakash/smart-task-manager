@@ -56,15 +56,16 @@ This application allows users to manage **Teams**, **Projects**, and **Tasks** w
 ```bash
 git clone https://github.com/ahadahamedakash/smart-task-manager.git
 cd smart-task-manager
-2. Install Dependencies
-bash
-Copy code
+```
+
+### 2. Install Dependencies
+
+````bash
 npm install
 🔧 Environment Variables
 Create a .env file and add:
 
-env
-Copy code
+```bash
 # MongoDB database connection string
 MONGODB_URI=
 
@@ -76,60 +77,63 @@ JWT_SECRET=
 
 # JWT expiry time (e.g., "1d", "7d", "12h")
 JWT_EXPIRES_IN=
-📝 Environment Variable Description
-Variable	Description
+````
+
+## 📝 Environment Variable
+
+```
 MONGODB_URI	MongoDB connection URL
 BCRYPT_SALT_ROUND	Number of bcrypt hashing rounds
 JWT_SECRET	Secret key for JWT signing
 JWT_EXPIRES_IN	Duration before JWT expires
+```
 
-▶️ Run the Development Server
-bash
-Copy code
+## ▶️ Run the Development Server
+
+```
 npm run dev
 App will run at:
 
-arduino
-Copy code
 http://localhost:3000
-🗂 Project Structure
-txt
-Copy code
-src/
- ├── app/                     # Routes & pages (App Router)
- ├── components/              # UI + Shared Components
- ├── lib/
- │    ├── db.ts               # MongoDB connection
- │    ├── action.ts           # Auth helper logic
- │    ├── validation.ts       # Zod schemas
- │    ├── models/             # Mongoose models
- │    └── utils/              # Utility functions
- ├── styles/                  # Tailwind configuration
-🧪 Server Actions Overview
-Team Actions
-createTeamAction
-
-getTeamsAction
-
-updateTeam
-
-deleteTeam
-
-Project Actions
-createProjectAction
-
-getProjectsAction
-
-Core Patterns Used
-Validate form data using Zod
-
-Get session via getSession()
-
-Connect DB using dbConnect()
-
-Use revalidatePath() to refresh UI
-
-Use .lean() for faster Mongo queries
-
-Populate team details in project results
 ```
+
+🗂 Project Structure
+
+src/
+├── app/ # Routes & pages (App Router)
+├── components/ # UI + Shared Components
+├── lib/
+│ ├── db.ts # MongoDB connection
+│ ├── action.ts # Auth helper logic
+│ ├── validation.ts # Zod schemas
+│ ├── models/ # Mongoose models
+│ └── utils/ # Utility functions
+├── styles/ # Tailwind configuration
+
+## 🧪 Server Actions Overview
+
+### Team Actions
+
+- createTeamAction
+
+- getTeamsAction
+
+- updateTeam
+
+- deleteTeam
+
+### Project Actions
+
+- createProjectAction
+
+- getProjectsAction
+
+### Core Patterns Used
+
+- Validate form data using Zod
+
+- Get session via getSession()
+
+- Connect DB using dbConnect()
+
+- Use revalidatePath() to refresh UI
