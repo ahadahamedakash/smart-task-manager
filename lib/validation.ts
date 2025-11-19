@@ -56,3 +56,10 @@ export const memberSchema = z.object({
   role: z.string().min(1, "Role is required").max(50),
   capacity: z.number().min(0).max(5),
 });
+
+export const taskSchema = z.object({
+  title: z.string().min(1, "Task title is required").max(200),
+  description: z.string().max(1000).optional(),
+  priority: z.enum(["Low", "Medium", "High"]),
+  status: z.enum(["Pending", "In Progress", "Done"]),
+});

@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 import dbConnect from "@/lib/db";
 import Team from "@/lib/models/team-model";
-import Member from "@/lib/models/member-schema";
+import Member from "@/lib/models/member-model";
 
 import { getSession } from "@/lib/action";
 import { memberSchema, teamSchema } from "@/lib/validation";
