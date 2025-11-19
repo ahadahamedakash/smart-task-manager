@@ -1,4 +1,4 @@
-import { Team } from "@/lib/types";
+import { TTeam } from "@/lib/types";
 import { Plus, Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,7 @@ import { CreateTeamDialog } from "@/components/teams/create-team-dialog";
 export default async function TeamsPage() {
   const data = await getTeamsAction();
 
-  const teams: Team[] = (data?.data as Team[]) || [];
+  const teams: TTeam[] = (data?.data as TTeam[]) || [];
 
   return (
     <div className="space-y-6">

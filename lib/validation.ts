@@ -45,3 +45,8 @@ export const teamSchema = z.object({
     .min(5, "Team description must be at least 5 characters")
     .max(150, "Team description must be at most 150 characters"),
 });
+
+export const projectSchema = z.object({
+  projectName: z.string().min(1, "Project name is required").max(100),
+  description: z.string().max(500).optional(),
+});
