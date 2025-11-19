@@ -99,6 +99,7 @@ http://localhost:3000
 
 🗂 Project Structure
 
+```
 src/
 ├── app/ # Routes & pages (App Router)
 ├── components/ # UI + Shared Components
@@ -109,6 +110,7 @@ src/
 │ ├── models/ # Mongoose models
 │ └── utils/ # Utility functions
 ├── styles/ # Tailwind configuration
+```
 
 ## 🧪 Server Actions Overview
 
