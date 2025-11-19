@@ -1,16 +1,17 @@
+import { Team } from "@/lib/types";
 import { Plus, Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
+import { getTeamsAction } from "./actions";
 import { TeamCard } from "@/components/teams/team-card";
 import { CreateTeamDialog } from "@/components/teams/create-team-dialog";
-import { getTeamsAction } from "./actions";
 
 export default async function TeamsPage() {
   const data = await getTeamsAction();
 
-  const teams = data?.data || [];
+  const teams: Team[] = (data?.data as Team[]) || [];
 
   return (
     <div className="space-y-6">
@@ -32,7 +33,7 @@ export default async function TeamsPage() {
       {teams && teams?.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {teams?.map((team) => (
-            <TeamCard key={team.id} team={team} />
+            <TeamCard key={team._id} team={team} />
           ))}
         </div>
       ) : (

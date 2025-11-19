@@ -30,11 +30,11 @@ export async function getSession(): Promise<TokenPayload | null> {
   return await verifyToken(token);
 }
 
+// VERIFY TOKEN
 export async function verifyToken(token: string): Promise<TokenPayload | null> {
-  console.log(token);
   try {
     const payload = await jwt.verify(token, JWT_SECRET);
-    console.log(payload);
+
     return payload as TokenPayload;
   } catch (error) {
     console.log(error);

@@ -11,14 +11,20 @@ import {
   DialogTrigger,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { Textarea } from "../ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
-import { createTeamAction } from "@/app/(dashboard)/teams/actions";
+import { Team } from "@/lib/types";
+import { updateTeamAction } from "@/app/(dashboard)/teams/actions";
 
-export function CreateTeamDialog({ children }: { children: React.ReactNode }) {
+export function EditTeamDialog({
+  children,
+  team,
+}: {
+  children: React.ReactNode;
+  team: Team;
+}) {
   const [open, setOpen] = useState(false);
 
   const [isLoading, startTransaction] = useTransition();
@@ -28,10 +34,10 @@ export function CreateTeamDialog({ children }: { children: React.ReactNode }) {
 
     startTransaction(async () => {
       try {
-        const result = await createTeamAction(formData);
+        const result = await updateTeamAction(team._id, formData);
 
         if (result.success) {
-          toast.success("Team created successfully");
+          toast.success(result.message || "Team updated successfully");
 
           setOpen(false);
         } else {
@@ -48,28 +54,25 @@ export function CreateTeamDialog({ children }: { children: React.ReactNode }) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create Team</DialogTitle>
-          <DialogDescription>
-            Create a new team to organize your projects and members
-          </DialogDescription>
+          <DialogTitle>Edit Team</DialogTitle>
+          <DialogDescription>Update team information</DialogDescription>
         </DialogHeader>
-
         <form action={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="teamName">Team Name</Label>
             <Input
               id="teamName"
               name="teamName"
-              placeholder="Engineering Team"
+              defaultValue={team.teamName}
               required
               maxLength={100}
             />
 
             <Label htmlFor="description">Team Description</Label>
-            <Textarea
+            <Input
               id="description"
               name="description"
-              placeholder="Engineering Team"
+              defaultValue={team.description}
               required
               maxLength={150}
             />
@@ -83,7 +86,7 @@ export function CreateTeamDialog({ children }: { children: React.ReactNode }) {
               Cancel
             </Button>
             <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Creating..." : "Create Team"}
+              {isLoading ? "Updating..." : "Update"}
             </Button>
           </div>
         </form>

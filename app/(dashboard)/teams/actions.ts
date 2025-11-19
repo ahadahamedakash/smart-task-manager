@@ -88,3 +88,109 @@ export async function getTeamsAction(): Promise<TeamResult> {
     return { success: false, message: "An error occured!", error: e as string };
   }
 }
+
+export async function updateTeamAction(
+  teamId: string,
+  formData: FormData
+): Promise<TeamResult> {
+  try {
+    const session = await getSession();
+
+    if (!session) {
+      return {
+        success: false,
+        message: "You are unauthorized to perform this action",
+        error: "Unauthorized",
+      };
+    }
+
+    const teamName = formData.get("teamName") as string;
+    const description = formData.get("description") as string;
+
+    const validation = teamSchema.safeParse({ teamName, description });
+
+    if (!validation.success) {
+      // const formattedErrors = validation.error.flatten().fieldErrors;
+
+      return {
+        success: false,
+        message: "Validation error",
+        // error: formattedErrors,
+      };
+    }
+
+    await dbConnect();
+
+    const team = await Team.findOne({
+      _id: teamId,
+      createdBy: session.userId,
+    });
+
+    if (!team) {
+      return {
+        success: false,
+        message: "Team not found",
+        error: "Not Found",
+      };
+    }
+
+    // Update the team
+    team.teamName = teamName;
+    team.description = description;
+    await team.save();
+
+    revalidatePath("/teams");
+
+    return {
+      success: true,
+      message: "Team updated successfully",
+      data: team,
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: "Failed to update team",
+      error: error.message,
+    };
+  }
+}
+
+export async function deleteTeamAction(teamId: string): Promise<TeamResult> {
+  try {
+    const session = await getSession();
+    if (!session) {
+      return { success: false, message: "Unauthorized", error: "Unauthorized" };
+    }
+
+    await dbConnect();
+
+    const team = await Team.findOne({
+      _id: teamId,
+      createdBy: session.userId,
+    });
+
+    if (!team) {
+      return {
+        success: false,
+        message: "Team not found",
+        error: "Not Found",
+      };
+    }
+
+    // Delete team
+    await Team.deleteOne({ _id: teamId });
+
+    revalidatePath("/teams");
+
+    return {
+      success: true,
+      message: "Team deleted successfully",
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: "Failed to delete team",
+      error: error.message,
+    };
+  }
+}
