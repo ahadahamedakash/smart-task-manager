@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { revalidatePath } from "next/cache";
 
 import dbConnect from "@/lib/db";
 import Team from "@/lib/models/team-model";
+import Member from "@/lib/models/member-schema";
 
 import { getSession } from "@/lib/action";
-import { teamSchema } from "@/lib/validation";
+import { memberSchema, teamSchema } from "@/lib/validation";
 
 export interface TeamResult {
   success: boolean;
@@ -193,4 +195,54 @@ export async function deleteTeamAction(teamId: string): Promise<TeamResult> {
       error: error.message,
     };
   }
+}
+
+export async function createMemberAction(
+  formData: FormData
+): Promise<TeamResult> {
+  const session = await getSession();
+
+  if (!session)
+    return {
+      success: false,
+      message: "You are unauthorized to perform this action",
+      error: "Unauthorized",
+    };
+
+  const teamId = formData.get("teamId") as string;
+  const name = formData.get("name") as string;
+  const role = formData.get("role") as string;
+  const capacity = parseInt(formData.get("capacity") as string);
+
+  const validation = memberSchema.safeParse({ name, role, capacity });
+
+  if (!validation.success) {
+    const formattedErrors = validation.error.flatten().fieldErrors;
+
+    console.log("formattedErrors: ", formattedErrors);
+
+    return {
+      success: false,
+      message: "Validation error",
+      // error: formattedErrors,
+    };
+  }
+
+  await dbConnect();
+
+  const MemberData = await Member.create({
+    name,
+    role,
+    capacity,
+    teamId,
+    createdBy: session.userId,
+  });
+
+  revalidatePath("/teams");
+  revalidatePath(`/teams/${teamId}`);
+  return {
+    success: true,
+    message: "MemberData created successfully",
+    data: MemberData,
+  };
 }

@@ -50,3 +50,9 @@ export const projectSchema = z.object({
   projectName: z.string().min(1, "Project name is required").max(100),
   description: z.string().max(500).optional(),
 });
+
+export const memberSchema = z.object({
+  name: z.string().min(1, "Member name is required").max(50),
+  role: z.string().min(1, "Role is required").max(50),
+  capacity: z.number().min(0).max(5),
+});
