@@ -28,7 +28,7 @@ const LoginPage = () => {
         const result = await loginAction(formData);
         if (result.success) {
           toast.success(result.message || "Logged in successfully!");
-          router.push("/");
+          router.push("/dashboard");
           router.refresh();
         }
         if (!result.success) {

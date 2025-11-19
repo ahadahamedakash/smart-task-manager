@@ -60,7 +60,11 @@ export async function loginAction(formData: FormData): Promise<LoginResult> {
     }
 
     const token = jwt.sign(
-      { userId: user._id.toString(), email: user.email },
+      {
+        userId: user._id.toString(),
+        fullName: user.fullName,
+        userName: user.userName,
+      },
       JWT_SECRET as string,
       { expiresIn: "7d" }
     );
