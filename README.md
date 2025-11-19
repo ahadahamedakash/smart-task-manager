@@ -2,7 +2,7 @@
 
 A modern and scalable **Task Management System** built using:
 
-- **Next.js 14 (App Router)**
+- **Next.js (App Router)**
 - **MongoDB + Mongoose**
 - **TypeScript**
 - **Server Actions**
