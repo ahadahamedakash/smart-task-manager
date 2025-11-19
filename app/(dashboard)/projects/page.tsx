@@ -57,20 +57,20 @@ export default async function ProjectsPage() {
             Manage your projects and tasks
           </p>
         </div>
-        <CreateProjectDialog teams={teams || []}>
+        {/* <CreateProjectDialog teams={teams || []}>
           <Button>
             <Plus className="h-4 w-4 mr-2" />
             Create Project
           </Button>
-        </CreateProjectDialog>
+        </CreateProjectDialog> */}
       </div>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {/* <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {projectss?.map((project) => (
           <ProjectCard key={project._id} project={project} />
         ))}
-      </div>
+      </div> */}
 
-      {projectsWithTaskCount?.length > 0 ? (
+      {/* {projectsWithTaskCount?.length > 0 ? (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projectsWithTaskCount?.map((project) => (
             <ProjectCard key={project._id} project={project} />
@@ -92,7 +92,7 @@ export default async function ProjectsPage() {
             </CreateProjectDialog>
           </CardContent>
         </Card>
-      )}
+      )} */}
     </div>
   );
 }

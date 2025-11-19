@@ -10,11 +10,11 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-import { Team } from "@/lib/types";
+import { TTeam } from "@/lib/types";
 import { EditTeamDialog } from "./edit-team-dialog";
 import { DeleteTeamDialog } from "./delete-team-dialog";
 
-export function TeamCard({ team }: { team: Team }) {
+export function TeamCard({ team }: { team: TTeam }) {
   return (
     <Card>
       <CardHeader>

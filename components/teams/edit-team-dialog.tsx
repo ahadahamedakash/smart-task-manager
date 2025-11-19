@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
-import { Team } from "@/lib/types";
+import { TTeam } from "@/lib/types";
 import { updateTeamAction } from "@/app/(dashboard)/teams/actions";
 
 export function EditTeamDialog({
@@ -23,7 +23,7 @@ export function EditTeamDialog({
   team,
 }: {
   children: React.ReactNode;
-  team: Team;
+  team: TTeam;
 }) {
   const [open, setOpen] = useState(false);
 

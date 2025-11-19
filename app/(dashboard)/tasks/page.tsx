@@ -62,7 +62,7 @@ export default async function TasksPage({
               Kanban Board
             </Button>
           </Link>
-          <CreateTaskDialog
+          {/* <CreateTaskDialog
             projects={projects || []}
             members={allMembers || []}
           >
@@ -70,7 +70,7 @@ export default async function TasksPage({
               <Plus className="h-4 w-4 mr-2" />
               Create Task
             </Button>
-          </CreateTaskDialog>
+          </CreateTaskDialog> */}
         </div>
       </div>
 
