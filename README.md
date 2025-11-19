@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 Smart Task Manager
 
-## Getting Started
+A modern and scalable **Task Management System** built using:
 
-First, run the development server:
+- **Next.js 14 (App Router)**
+- **MongoDB + Mongoose**
+- **TypeScript**
+- **Server Actions**
+- **Zod Validation**
+- **ShadCN UI**
+- **Tailwind CSS**
+
+This application allows users to manage **Teams**, **Projects**, and **Tasks** with secure authentication and optimized workflow.
+
+---
+
+## 🚀 Features
+
+### 🔐 Authentication
+
+- Secure login using **JWT**
+- Password hashing using **bcrypt**
+- API protection via **Server Actions**
+
+### 👥 Team Management
+
+- Create, update, delete teams
+- Teams linked to authenticated users
+- Zod validation on the server
+
+### 📁 Project Management
+
+- Create projects under teams
+- Populate related team details on fetch
+- Full CRUD using **Server Actions**
+
+### ✅ Task Management
+
+- Create, update, delete tasks
+- Assign tasks to teams & projects
+
+### 🧱 Technical Highlights
+
+- **Server Actions** for backend logic
+- **Mongoose** models
+- **Lean queries** for performance
+- **ShadCN UI** components
+- **App Router** architecture
+
+---
+
+## 📦 Installation
+
+### 1. Clone the Repository
 
 ```bash
+git clone https://github.com/ahadahamedakash/smart-task-manager.git
+cd smart-task-manager
+2. Install Dependencies
+bash
+Copy code
+npm install
+🔧 Environment Variables
+Create a .env file and add:
+
+env
+Copy code
+# MongoDB database connection string
+MONGODB_URI=
+
+# Salt rounds for bcrypt password hashing
+BCRYPT_SALT_ROUND=
+
+# Secret key for signing JWT tokens
+JWT_SECRET=
+
+# JWT expiry time (e.g., "1d", "7d", "12h")
+JWT_EXPIRES_IN=
+📝 Environment Variable Description
+Variable	Description
+MONGODB_URI	MongoDB connection URL
+BCRYPT_SALT_ROUND	Number of bcrypt hashing rounds
+JWT_SECRET	Secret key for JWT signing
+JWT_EXPIRES_IN	Duration before JWT expires
+
+▶️ Run the Development Server
+bash
+Copy code
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+App will run at:
+
+arduino
+Copy code
+http://localhost:3000
+🗂 Project Structure
+txt
+Copy code
+src/
+ ├── app/                     # Routes & pages (App Router)
+ ├── components/              # UI + Shared Components
+ ├── lib/
+ │    ├── db.ts               # MongoDB connection
+ │    ├── action.ts           # Auth helper logic
+ │    ├── validation.ts       # Zod schemas
+ │    ├── models/             # Mongoose models
+ │    └── utils/              # Utility functions
+ ├── styles/                  # Tailwind configuration
+🧪 Server Actions Overview
+Team Actions
+createTeamAction
+
+getTeamsAction
+
+updateTeam
+
+deleteTeam
+
+Project Actions
+createProjectAction
+
+getProjectsAction
+
+Core Patterns Used
+Validate form data using Zod
+
+Get session via getSession()
+
+Connect DB using dbConnect()
+
+Use revalidatePath() to refresh UI
+
+Use .lean() for faster Mongo queries
+
+Populate team details in project results
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
