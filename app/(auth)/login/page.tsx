@@ -87,7 +87,10 @@ const LoginPage = () => {
 
             <p className="text-sm text-center text-muted-foreground">
               Don&apos;t have an account?{" "}
-              <Link className="text-muted-foreground underline" href="/login">
+              <Link
+                className="text-muted-foreground underline"
+                href="/register"
+              >
                 Register
               </Link>
             </p>
